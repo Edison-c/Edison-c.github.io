@@ -102,24 +102,24 @@
   <meta name="description" content="多列布局定宽+自适应1）使用float+overflow（1）原理、用法 原理：通过将左边框脱离文本流，设置右边规定当内容溢出元素框时发生的事情以达到多列布局。 用法：先将左框设置为float:left、width、margin-left，再设置实际的右框overflow:hidden。  （2）代码实例123456789101112131415161718&amp;lt;div class=&quot;paren">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSS布局方案-2">
-<meta property="og:url" content="http://yoursite.com/2017/04/12/CSS布局方案-2/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/04/05/CSS布局方案-2/index.html">
 <meta property="og:site_name" content="Edison-c&#39;s blog">
 <meta property="og:description" content="多列布局定宽+自适应1）使用float+overflow（1）原理、用法 原理：通过将左边框脱离文本流，设置右边规定当内容溢出元素框时发生的事情以达到多列布局。 用法：先将左框设置为float:left、width、margin-left，再设置实际的右框overflow:hidden。  （2）代码实例123456789101112131415161718&amp;lt;div class=&quot;paren">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2017/04/12/CSS布局方案-2/df.png">
-<meta property="og:image" content="http://yoursite.com/2017/04/12/CSS布局方案-2/df2.png">
-<meta property="og:updated_time" content="2018-04-12T08:12:19.000Z">
+<meta property="og:image" content="http://yoursite.com/2017/04/05/CSS布局方案-2/df.png">
+<meta property="og:image" content="http://yoursite.com/2017/04/05/CSS布局方案-2/df2.png">
+<meta property="og:updated_time" content="2018-04-12T09:31:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS布局方案-2">
 <meta name="twitter:description" content="多列布局定宽+自适应1）使用float+overflow（1）原理、用法 原理：通过将左边框脱离文本流，设置右边规定当内容溢出元素框时发生的事情以达到多列布局。 用法：先将左框设置为float:left、width、margin-left，再设置实际的右框overflow:hidden。  （2）代码实例123456789101112131415161718&amp;lt;div class=&quot;paren">
-<meta name="twitter:image" content="http://yoursite.com/2017/04/12/CSS布局方案-2/df.png">
+<meta name="twitter:image" content="http://yoursite.com/2017/04/05/CSS布局方案-2/df.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/12/CSS布局方案-2/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/05/CSS布局方案-2/"/>
 
 
 
@@ -316,7 +316,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/12/CSS布局方案-2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/05/CSS布局方案-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="edison-c">
@@ -345,7 +345,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-12T15:27:30+08:00">2017-04-12</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-05T15:27:30+08:00">2017-04-05</time>
             
 
             
@@ -500,10 +500,10 @@
 <li>用法：先将左、中框设置为<code>float:left</code>、margin-right，再设置右框<code>overflow:hidden</code>，最后给左中框中的内容设置width。</li>
 </ul>
 <h5 id="（2）代码实例-9"><a href="#（2）代码实例-9" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>left<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"center"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>center<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">.left,.center&#123;</span><br><span class="line">    float: left;</span><br><span class="line">    margin-right: 20px;</span><br><span class="line">&#125;</span><br><span class="line">.right&#123;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">&#125;</span><br><span class="line">.left p,.center p&#123;</span><br><span class="line">    width: 100px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="等分布局"><a href="#等分布局" class="headerlink" title="等分布局"></a>等分布局</h3><p><img src="/2017/04/12/CSS布局方案-2/df.png"></p>
+<h3 id="等分布局"><a href="#等分布局" class="headerlink" title="等分布局"></a>等分布局</h3><p><img src="/2017/04/05/CSS布局方案-2/df.png"></p>
 <p>公式转化：</p>
 <p><code>l=w*n+g*(n-1)-&gt;l=w*n+g*n-g-&gt;l+g=（w+g）*n</code></p>
-<p><img src="/2017/04/12/CSS布局方案-2/df2.png"></p>
+<p><img src="/2017/04/05/CSS布局方案-2/df2.png"></p>
 <p>因此，我们需要解决两个问题：</p>
 <ul>
 <li>如何让总宽度增加g(即：L+g)</li>
@@ -682,7 +682,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -699,7 +699,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
