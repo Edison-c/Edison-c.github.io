@@ -310,6 +310,215 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/14/进程和线程-Process-and-Thread/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="edison-c">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edison-c's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/14/进程和线程-Process-and-Thread/" itemprop="url">进程和线程(Process and Thread)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-14T11:02:22+08:00">2017-11-14</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python3/" itemprop="url" rel="index"><span itemprop="name">python3</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计：</span>
+                
+                <span title="字数统计">5.1k字</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长：</span>
+                
+                <span title="阅读时长">11:22分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h4><p>Unix/Linux操作系统提供了一个<code>fork()</code>系统调用，它非常特殊。普通的函数调用，调用一次，返回一次，但是<code>fork()</code>调用一次，返回两次，因为操作系统自动把当前进程（称为父进程）复制了一份（称为子进程），然后，分别在父进程和子进程内返回。</p>
+<p>子进程永远返回<code>0</code>，而父进程返回子进程的<code>ID</code>。这样做的理由是，一个父进程可以<code>fork</code>出很多子进程，所以，父进程要记下每个子进程的<code>ID</code>，而子进程只需要调用<code>getppid()</code>就可以拿到父进程的<code>ID</code>。</p>
+<p>Python的<code>os</code>模块封装了常见的系统调用，其中就包括<code>fork</code>，可以在Python程序中轻松创建子进程：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">print(<span class="string">'Process (%s) start...'</span> % os.getpid())</span><br><span class="line"><span class="comment"># Only works on Unix/Linux/Mac:</span></span><br><span class="line">pid = os.fork()</span><br><span class="line"><span class="keyword">if</span> pid == <span class="number">0</span>:</span><br><span class="line">    print(<span class="string">'I am child process (%s) and my parent is %s.'</span> % (os.getpid(), os.getppid()))</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">'I (%s) just created a child process (%s).'</span> % (os.getpid(), pid))</span><br></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Process (<span class="number">876</span>) start...</span><br><span class="line">I (<span class="number">876</span>) just created a child process (<span class="number">877</span>).</span><br><span class="line">I am child process (<span class="number">877</span>) <span class="keyword">and</span> my parent <span class="keyword">is</span> <span class="number">876.</span></span><br></pre></td></tr></table></figure>
+<h5 id="multiprocessing"><a href="#multiprocessing" class="headerlink" title="multiprocessing"></a>multiprocessing</h5><p>由于Python是跨平台的，自然也应该提供一个跨平台的多进程支持。<code>multiprocessing</code>模块就是跨平台版本的多进程模块。</p>
+<p><code>multiprocessing</code>模块提供了一个Process类来代表一个进程对象，下面的例子演示了启动一个子进程并等待其结束：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># 子进程要执行的代码</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_proc</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'Run child process %s (%s)...'</span> % (name, os.getpid()))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>:</span><br><span class="line">    print(<span class="string">'Parent process %s.'</span> % os.getpid())</span><br><span class="line">    p = Process(target=run_proc, args=(<span class="string">'test'</span>,))</span><br><span class="line">    print(<span class="string">'Child process will start.'</span>)</span><br><span class="line">    p.start()</span><br><span class="line">    p.join()</span><br><span class="line">    print(<span class="string">'Child process end.'</span>)</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Parent process <span class="number">928.</span></span><br><span class="line">Process will start.</span><br><span class="line">Run child process test (<span class="number">929</span>)...</span><br><span class="line">Process end.</span><br></pre></td></tr></table></figure></p>
+<p>创建子进程时，只需要传入一个执行函数和函数的参数，创建一个<code>Process</code>实例，用<code>start()</code>方法启动，这样创建进程比<code>fork()</code>还要简单。</p>
+<p><code>join()</code>方法可以等待子进程结束后再继续往下运行，通常用于进程间的同步。</p>
+<h5 id="Pool"><a href="#Pool" class="headerlink" title="Pool"></a>Pool</h5><p>如果要启动大量的子进程，可以用进程池的方式批量创建子进程：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> os, time, random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">long_time_task</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">'Run task %s (%s)...'</span> % (name, os.getpid()))</span><br><span class="line">    start = time.time()</span><br><span class="line">    time.sleep(random.random() * <span class="number">3</span>)</span><br><span class="line">    end = time.time()</span><br><span class="line">    print(<span class="string">'Task %s runs %0.2f seconds.'</span> % (name, (end - start)))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>:</span><br><span class="line">    print(<span class="string">'Parent process %s.'</span> % os.getpid())</span><br><span class="line">    p = Pool(<span class="number">4</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">        p.apply_async(long_time_task, args=(i,))</span><br><span class="line">    print(<span class="string">'Waiting for all subprocesses done...'</span>)</span><br><span class="line">    p.close()</span><br><span class="line">    p.join()</span><br><span class="line">    print(<span class="string">'All subprocesses done.'</span>)</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Parent process <span class="number">669.</span></span><br><span class="line">Waiting <span class="keyword">for</span> all subprocesses done...</span><br><span class="line">Run task <span class="number">0</span> (<span class="number">671</span>)...</span><br><span class="line">Run task <span class="number">1</span> (<span class="number">672</span>)...</span><br><span class="line">Run task <span class="number">2</span> (<span class="number">673</span>)...</span><br><span class="line">Run task <span class="number">3</span> (<span class="number">674</span>)...</span><br><span class="line">Task <span class="number">2</span> runs <span class="number">0.14</span> seconds.</span><br><span class="line">Run task <span class="number">4</span> (<span class="number">673</span>)...</span><br><span class="line">Task <span class="number">1</span> runs <span class="number">0.27</span> seconds.</span><br><span class="line">Task <span class="number">3</span> runs <span class="number">0.86</span> seconds.</span><br><span class="line">Task <span class="number">0</span> runs <span class="number">1.41</span> seconds.</span><br><span class="line">Task <span class="number">4</span> runs <span class="number">1.91</span> seconds.</span><br><span class="line">All subprocesses done.</span><br></pre></td></tr></table></figure>
+<p>代码解读：</p>
+<p>对<code>Pool</code>对象调用<code>join()</code>方法会等待所有子进程执行完毕，调用<code>join()</code>之前必须先调用<code>close()</code>，调用<code>close()</code>之后就不能继续添加新的<code>Process</code>了。</p>
+<p>请注意输出的结果，<code>task 0，1，2，3</code>是立刻执行的，而<code>task 4</code>要等待前面某个task完成后才执行，这是因为<code>Pool</code>的默认大小在我的电脑上是4，因此，最多同时执行4个进程。这是Pool有意设计的限制，并不是操作系统的限制。如果改成：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p = Pool(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p>就可以同时跑5个进程。</p>
+<p>由于Pool的默认大小是CPU的核数，如果你不幸拥有8核CPU，你要提交至少9个子进程才能看到上面的等待效果。</p>
+<h5 id="子进程"><a href="#子进程" class="headerlink" title="子进程"></a>子进程</h5><p>很多时候，子进程并不是自身，而是一个外部进程。我们创建了子进程后，还需要控制子进程的输入和输出。</p>
+<p><code>subprocess</code>模块可以让我们非常方便地启动一个子进程，然后控制其输入和输出。</p>
+<p>下面的例子演示了如何在Python代码中运行命令<code>nslookup www.python.org</code>，这和命令行直接运行的效果是一样的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"></span><br><span class="line">print(<span class="string">'$ nslookup www.python.org'</span>)</span><br><span class="line">r = subprocess.call([<span class="string">'nslookup'</span>, <span class="string">'www.python.org'</span>])</span><br><span class="line">print(<span class="string">'Exit code:'</span>, r)</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ nslookup www.python.org</span><br><span class="line">Server:        <span class="number">192.168</span><span class="number">.19</span><span class="number">.4</span></span><br><span class="line">Address:    <span class="number">192.168</span><span class="number">.19</span><span class="number">.4</span><span class="comment">#53</span></span><br><span class="line"></span><br><span class="line">Non-authoritative answer:</span><br><span class="line">www.python.org    canonical name = python.map.fastly.net.</span><br><span class="line">Name:    python.map.fastly.net</span><br><span class="line">Address: <span class="number">199.27</span><span class="number">.79</span><span class="number">.223</span></span><br><span class="line"></span><br><span class="line">Exit code: <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>如果子进程还需要输入，则可以通过<code>communicate()</code>方法输入：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mport subprocess</span><br><span class="line"></span><br><span class="line">print(<span class="string">'$ nslookup'</span>)</span><br><span class="line">p = subprocess.Popen([<span class="string">'nslookup'</span>], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)</span><br><span class="line">output, err = p.communicate(<span class="string">b'set q=mx\npython.org\nexit\n'</span>)</span><br><span class="line">print(output.decode(<span class="string">'utf-8'</span>))</span><br><span class="line">print(<span class="string">'Exit code:'</span>, p.returncode)</span><br></pre></td></tr></table></figure>
+<p>上面的代码相当于在命令行执行命令<code>nslookup</code>，然后手动输入：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set q=mx</span><br><span class="line">python.org</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ nslookup</span><br><span class="line">Server:        <span class="number">192.168</span><span class="number">.19</span><span class="number">.4</span></span><br><span class="line">Address:    <span class="number">192.168</span><span class="number">.19</span><span class="number">.4</span><span class="comment">#53</span></span><br><span class="line"></span><br><span class="line">Non-authoritative answer:</span><br><span class="line">python.org    mail exchanger = <span class="number">50</span> mail.python.org.</span><br><span class="line"></span><br><span class="line">Authoritative answers can be found <span class="keyword">from</span>:</span><br><span class="line">mail.python.org    internet address = <span class="number">82.94</span><span class="number">.164</span><span class="number">.166</span></span><br><span class="line">mail.python.org    has AAAA address <span class="number">2001</span>:<span class="number">888</span>:<span class="number">2000</span>:d::a6</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Exit code: <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h5 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h5><p><code>Process</code>之间肯定是需要通信的，操作系统提供了很多机制来实现进程间的通信。Python的<code>multiprocessing</code>模块包装了底层的机制，提供了<code>Queue</code>、<code>Pipes</code>等多种方式来交换数据。</p>
+<p>我们以<code>Queue</code>为例，在父进程中创建两个子进程，一个往<code>Queue</code>里写数据，一个从<code>Queue</code>里读数据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process, Queue</span><br><span class="line"><span class="keyword">import</span> os, time, random</span><br><span class="line"></span><br><span class="line"><span class="comment"># 写数据进程执行的代码:</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write</span><span class="params">(q)</span>:</span></span><br><span class="line">    print(<span class="string">'Process to write: %s'</span> % os.getpid())</span><br><span class="line">    <span class="keyword">for</span> value <span class="keyword">in</span> [<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>]:</span><br><span class="line">        print(<span class="string">'Put %s to queue...'</span> % value)</span><br><span class="line">        q.put(value)</span><br><span class="line">        time.sleep(random.random())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读数据进程执行的代码:</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read</span><span class="params">(q)</span>:</span></span><br><span class="line">    print(<span class="string">'Process to read: %s'</span> % os.getpid())</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        value = q.get(<span class="keyword">True</span>)</span><br><span class="line">        print(<span class="string">'Get %s from queue.'</span> % value)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>:</span><br><span class="line">    <span class="comment"># 父进程创建Queue，并传给各个子进程：</span></span><br><span class="line">    q = Queue()</span><br><span class="line">    pw = Process(target=write, args=(q,))</span><br><span class="line">    pr = Process(target=read, args=(q,))</span><br><span class="line">    <span class="comment"># 启动子进程pw，写入:</span></span><br><span class="line">    pw.start()</span><br><span class="line">    <span class="comment"># 启动子进程pr，读取:</span></span><br><span class="line">    pr.start()</span><br><span class="line">    <span class="comment"># 等待pw结束:</span></span><br><span class="line">    pw.join()</span><br><span class="line">    <span class="comment"># pr进程里是死循环，无法等待其结束，只能强行终止:</span></span><br><span class="line">    pr.terminate()</span><br></pre></td></tr></table></figure>
+<p>运行结果如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Process to write: <span class="number">50563</span></span><br><span class="line">Put A to queue...</span><br><span class="line">Process to read: <span class="number">50564</span></span><br><span class="line">Get A <span class="keyword">from</span> queue.</span><br><span class="line">Put B to queue...</span><br><span class="line">Get B <span class="keyword">from</span> queue.</span><br><span class="line">Put C to queue...</span><br><span class="line">Get C <span class="keyword">from</span> queue.</span><br></pre></td></tr></table></figure>
+<p>在<code>Unix/Linux</code>下，<code>multiprocessing</code>模块封装了<code>fork()</code>调用，使我们不需要关注<code>fork()</code>的细节。由于Windows没有<code>fork</code>调用，因此，<code>multiprocessing</code>需要“模拟”出<code>fork</code>的效果，父进程所有Python对象都必须通过<code>pickle</code>序列化再传到子进程去，所有，如果<code>multiprocessing</code>在Windows下调用失败了，要先考虑是不是<code>pickle</code>失败了。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/21/函数式编程-Functional-Programming-for-python/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1255,267 +1464,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/12/CSS布局方案-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="edison-c">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Edison-c's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/12/CSS布局方案-1/" itemprop="url">CSS布局方案-1</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-12T11:02:40+08:00">2017-03-12</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/css/" itemprop="url" rel="index"><span itemprop="name">css</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计：</span>
-                
-                <span title="字数统计">4.3k字</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长：</span>
-                
-                <span title="阅读时长">9:34分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="居中布局"><a href="#居中布局" class="headerlink" title="居中布局"></a>居中布局</h2><h3 id="水平居中"><a href="#水平居中" class="headerlink" title="水平居中"></a>水平居中</h3><h4 id="1）使用inline-block-text-align"><a href="#1）使用inline-block-text-align" class="headerlink" title="1）使用inline-block+text-align"></a>1）使用inline-block+text-align</h4><h5 id="1）原理、用法"><a href="#1）原理、用法" class="headerlink" title="(1）原理、用法"></a>(1）原理、用法</h5><ul>
-<li>原理：先将子框由块级元素改变为行内块元素，再通过设置行内块元素居中以达到水平居中。</li>
-<li>用法：对子框设置<code>display:inline-block</code>，对父框设置<code>text-align:center</code>。</li>
-</ul>
-<h5 id="（2）代码实例"><a href="#（2）代码实例" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child&gt;DEMO&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string"></span></span></span><br><span class="line"><span class="tag"><span class="string">.child</span></span></span><br><span class="line"><span class="tag"><span class="string">&#123;</span></span></span><br><span class="line"><span class="tag"><span class="string">    display:inline-block;</span></span></span><br><span class="line"><span class="tag"><span class="string">&#125;</span></span></span><br><span class="line"><span class="tag"><span class="string">.parent&#123;</span></span></span><br><span class="line"><span class="tag"><span class="string">    text-align:center;</span></span></span><br><span class="line"><span class="tag"><span class="string">&#125;</span></span></span><br></pre></td></tr></table></figure>
-<h5 id="（3）优缺点"><a href="#（3）优缺点" class="headerlink" title="（3）优缺点"></a>（3）优缺点</h5><ul>
-<li>优点：兼容性好，甚至可以兼容ie6、ie7</li>
-<li>缺点：child里的文字也会水平居中，可以在<code>.child</code>添加<code>text-align:left</code>;还原</li>
-</ul>
-<h4 id="2）使用table-margin"><a href="#2）使用table-margin" class="headerlink" title="2）使用table+margin"></a>2）使用table+margin</h4><h5 id="（1）原理、用法"><a href="#（1）原理、用法" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：先将子框设置为块级表格来显示（类似 ），再设置子框居中以达到水平居中。</li>
-<li>用法：对子框设置<code>display:table</code>，再设置<code>margin:0 auto</code>。</li>
-</ul>
-<h5 id="（2）代码实例-1"><a href="#（2）代码实例-1" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child&gt;DEMO&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string"> </span></span></span><br><span class="line"><span class="tag"><span class="string">.child &#123;</span></span></span><br><span class="line"><span class="tag"><span class="string">    display:table;</span></span></span><br><span class="line"><span class="tag"><span class="string">    margin:0 auto;</span></span></span><br><span class="line"><span class="tag"><span class="string">&#125;</span></span></span><br></pre></td></tr></table></figure>
-<h5 id="3）优缺点："><a href="#3）优缺点：" class="headerlink" title="(3）优缺点："></a>(3）优缺点：</h5><ul>
-<li>优点：只设置了child，ie8以上都支持</li>
-<li>缺点：不支持ie6、ie7,将div换成table</li>
-</ul>
-<h4 id="3）使用absolute-transform"><a href="#3）使用absolute-transform" class="headerlink" title="3）使用absolute+transform"></a>3）使用absolute+transform</h4><h5 id="（1）原理、用法-1"><a href="#（1）原理、用法-1" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：将子框设置为绝对定位，移动子框，使子框左侧距离相对框左侧边框的距离为相对框宽度的一半，再通过向左移动子框的一半宽度以达到水平居中。当然，在此之前，我们需要设置父框为相对定位，使父框成为子框的相对框。</li>
-<li>用法：对父框设置<code>position:relative</code>，对子框设置<code>position:absolute，left:50%</code>，<code>transform:translateX(-50%)</code>。</li>
-</ul>
-<h5 id="（2）代码实例-2"><a href="#（2）代码实例-2" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child&gt;DEMO&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string"></span></span></span><br><span class="line"><span class="tag"><span class="string">.parent &#123;</span></span></span><br><span class="line"><span class="tag"><span class="string">    position:relative;</span></span></span><br><span class="line"><span class="tag"><span class="string">&#125;</span></span></span><br><span class="line"><span class="tag"><span class="string">.child &#123;</span></span></span><br><span class="line"><span class="tag"><span class="string">    position:absolute;</span></span></span><br><span class="line"><span class="tag"><span class="string">    left:50%;</span></span></span><br><span class="line"><span class="tag"><span class="string">    transform:translateX(-50%);</span></span></span><br><span class="line"><span class="tag"><span class="string">&#125;</span></span></span><br></pre></td></tr></table></figure>
-<h5 id="（3）优缺点-1"><a href="#（3）优缺点-1" class="headerlink" title="（3）优缺点"></a>（3）优缺点</h5><ul>
-<li>优点：居中元素不会对其他的产生影响</li>
-<li>缺点：transform属于css3内容，兼容性存在一定问题，高版本浏览器需要添加一些前缀</li>
-</ul>
-<h4 id="4）使用flex-margin"><a href="#4）使用flex-margin" class="headerlink" title="4）使用flex+margin"></a>4）使用flex+margin</h4><h5 id="（1）原理、用法-2"><a href="#（1）原理、用法-2" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：通过CSS3中的布局利器flex将子框转换为flex item，再设置子框居中以达到居中。</li>
-<li>用法：先将父框设置为display:flex，再设置子框<code>margin:0 auto</code>。</li>
-</ul>
-<h5 id="（2）代码实例-3"><a href="#（2）代码实例-3" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child&gt;DEMO&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string"></span></span></span><br><span class="line"><span class="tag"><span class="string">.parent &#123;</span></span></span><br><span class="line"><span class="tag"><span class="string">    display:flex;</span></span></span><br><span class="line"><span class="tag"><span class="string">&#125;</span></span></span><br><span class="line"><span class="tag"><span class="string">.child &#123;</span></span></span><br><span class="line"><span class="tag"><span class="string">    margin:0 auto;</span></span></span><br><span class="line"><span class="tag"><span class="string">&#125;</span></span></span><br></pre></td></tr></table></figure>
-<h5 id="（3）优缺点-2"><a href="#（3）优缺点-2" class="headerlink" title="（3）优缺点"></a>（3）优缺点</h5><ul>
-<li>缺点：低版本浏览器(ie6 ie7 ie8)不支持</li>
-</ul>
-<h4 id="5）使用flex-justify-content"><a href="#5）使用flex-justify-content" class="headerlink" title="5）使用flex+justify-content"></a>5）使用flex+justify-content</h4><h5 id="（1）原理、用法-3"><a href="#（1）原理、用法-3" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：通过CSS3中的布局利器flex中的justify-content属性来达到水平居中。</li>
-<li>用法：先将父框设置为<code>display:flex</code>，再设置<code>justify-content:center</code>。</li>
-</ul>
-<h5 id="（2）代码实例-4"><a href="#（2）代码实例-4" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child&gt;DEMO&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string"></span></span></span><br><span class="line"><span class="tag"><span class="string">.parent &#123;</span></span></span><br><span class="line"><span class="tag"><span class="string">    display:flex;</span></span></span><br><span class="line"><span class="tag"><span class="string">    justify-content:center;</span></span></span><br><span class="line"><span class="tag"><span class="string">&#125;</span></span></span><br></pre></td></tr></table></figure>
-<h5 id="（3）优缺点-3"><a href="#（3）优缺点-3" class="headerlink" title="（3）优缺点"></a>（3）优缺点</h5><ul>
-<li>优点：设置parent即可</li>
-<li>缺点：低版本浏览器(ie6 ie7 ie8)不支持</li>
-</ul>
-<h3 id="垂直居中"><a href="#垂直居中" class="headerlink" title="垂直居中"></a>垂直居中</h3><h4 id="1）使用table-cell-vertical-align"><a href="#1）使用table-cell-vertical-align" class="headerlink" title="1）使用table-cell+vertical-align"></a>1）使用table-cell+vertical-align</h4><h5 id="（1）原理、用法-4"><a href="#（1）原理、用法-4" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：通过将父框转化为一个表格单元格显示（类似 <td> 和 <th>），再通过设置属性，使表格单元格内容垂直居中以达到垂直居中。</th></td></li>
-<li>用法：先将父框设置为<code>display:table-cell</code>，再设置<code>vertical-align:middle</code>。</li>
-</ul>
-<h5 id="（2）代码实例-5"><a href="#（2）代码实例-5" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child&gt;DEMO&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string"></span></span></span><br><span class="line"><span class="tag"><span class="string">.parent &#123;</span></span></span><br><span class="line"><span class="tag"><span class="string">    display:table-cell;</span></span></span><br><span class="line"><span class="tag"><span class="string">    vertical-align:middle;</span></span></span><br><span class="line"><span class="tag"><span class="string">&#125;</span></span></span><br></pre></td></tr></table></figure>
-<h5 id="（3）优缺点-4"><a href="#（3）优缺点-4" class="headerlink" title="（3）优缺点"></a>（3）优缺点</h5><ul>
-<li>优点：兼容性较好，ie8以上均支持</li>
-</ul>
-<h4 id="2）使用absolute-transform"><a href="#2）使用absolute-transform" class="headerlink" title="2）使用absolute+transform"></a>2）使用absolute+transform</h4><h5 id="（1）原理、用法-5"><a href="#（1）原理、用法-5" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：类似于水平居中时的absolute+transform原理。将子框设置为绝对定位，移动子框，使子框上边距离相对框上边边框的距离为相对框高度的一半，再通过向上移动子框的一半高度以达到垂直居中。当然，在此之前，我们需要设置父框为相对定位，使父框成为子框的相对框。</li>
-<li>用法：先将父框设置为<code>position:relative</code>，再设置子框<code>position:absolute，top:50%</code>，<code>transform:translateY(-50%)</code>。</li>
-</ul>
-<h5 id="（2）代码实例-6"><a href="#（2）代码实例-6" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child&gt;DEMO&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string"></span></span></span><br><span class="line"><span class="tag"><span class="string">.parent &#123;</span></span></span><br><span class="line"><span class="tag"><span class="string">    position:relative;</span></span></span><br><span class="line"><span class="tag"><span class="string">&#125;</span></span></span><br><span class="line"><span class="tag"><span class="string">.child &#123;</span></span></span><br><span class="line"><span class="tag"><span class="string">    position:absolute;</span></span></span><br><span class="line"><span class="tag"><span class="string">    top:50%;</span></span></span><br><span class="line"><span class="tag"><span class="string">    transform:translateY(-50%);</span></span></span><br><span class="line"><span class="tag"><span class="string">&#125;</span></span></span><br></pre></td></tr></table></figure>
-<h5 id="（3）优缺点-5"><a href="#（3）优缺点-5" class="headerlink" title="（3）优缺点"></a>（3）优缺点</h5><ul>
-<li>优点：居中元素不会对其他的产生影响</li>
-<li>缺点：transform属于CSS3内容，兼容性存在一定问题，高版本浏览器需要添加一些前缀</li>
-</ul>
-<h4 id="3）使用flex-align-items"><a href="#3）使用flex-align-items" class="headerlink" title="3）使用flex+align-items"></a>3）使用flex+align-items</h4><h5 id="（1）原理、用法-6"><a href="#（1）原理、用法-6" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：通过设置CSS3中的布局利器flex中的属性align-items，使子框垂直居中。</li>
-<li>用法：先将父框设置为<code>position:flex</code>，再设置<code>align-items:center</code>。</li>
-</ul>
-<h5 id="（2）代码实例-7"><a href="#（2）代码实例-7" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child&gt;DEMO&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string"></span></span></span><br><span class="line"><span class="tag"><span class="string">.parent &#123;</span></span></span><br><span class="line"><span class="tag"><span class="string">    position:flex;</span></span></span><br><span class="line"><span class="tag"><span class="string">    align-items:center;</span></span></span><br><span class="line"><span class="tag"><span class="string">&#125;</span></span></span><br></pre></td></tr></table></figure>
-<h5 id="（3）优缺点-6"><a href="#（3）优缺点-6" class="headerlink" title="（3）优缺点"></a>（3）优缺点</h5><ul>
-<li>优点：只设置parent</li>
-<li>缺点：兼容性存在一定问题</li>
-</ul>
-<h3 id="水平垂直居中"><a href="#水平垂直居中" class="headerlink" title="水平垂直居中"></a>水平垂直居中</h3><h4 id="1）使用absolute-transform"><a href="#1）使用absolute-transform" class="headerlink" title="1）使用absolute+transform"></a>1）使用absolute+transform</h4><h5 id="（1）原理、用法-7"><a href="#（1）原理、用法-7" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：将水平居中时的absolute+transform和垂直居中时的absolute+transform相结合。参考：水平居中的3）和垂直居中的2）。</li>
-</ul>
-<h5 id="（2）代码实例-8"><a href="#（2）代码实例-8" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child&gt;DEMO&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string"></span></span></span><br><span class="line"><span class="tag"><span class="string">.parent &#123;</span></span></span><br><span class="line"><span class="tag"><span class="string">    position:relative;</span></span></span><br><span class="line"><span class="tag"><span class="string">&#125;</span></span></span><br><span class="line"><span class="tag"><span class="string">.child &#123;</span></span></span><br><span class="line"><span class="tag"><span class="string">    position:absolute;</span></span></span><br><span class="line"><span class="tag"><span class="string">    left:50%;</span></span></span><br><span class="line"><span class="tag"><span class="string">    top:50%;</span></span></span><br><span class="line"><span class="tag"><span class="string">    transform:tranplate(-50%,-50%);</span></span></span><br><span class="line"><span class="tag"><span class="string">&#125;</span></span></span><br></pre></td></tr></table></figure>
-<h5 id="3）优缺点"><a href="#3）优缺点" class="headerlink" title="3）优缺点"></a>3）优缺点</h5><ul>
-<li>优点：child元素不会对其他元素产生影响</li>
-<li>缺点：兼容性存在一定问题</li>
-</ul>
-<h4 id="2）使用inline-block-text-align-table-cell-vertical-align"><a href="#2）使用inline-block-text-align-table-cell-vertical-align" class="headerlink" title="2）使用inline-block+text-align+table-cell+vertical-align"></a>2）使用inline-block+text-align+table-cell+vertical-align</h4><h5 id="（1）原理、用法-8"><a href="#（1）原理、用法-8" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：使用inline-block+text-align水平居中，再用table-cell+vertical-align垂直居中，将二者结合起来。详见：水平居中的1）和垂直居中的1)。</li>
-</ul>
-<p>#####（2）代码实例</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child&gt;DEMO&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string"></span></span></span><br><span class="line"><span class="tag"><span class="string">.parent &#123;</span></span></span><br><span class="line"><span class="tag"><span class="string">    text-align:center;</span></span></span><br><span class="line"><span class="tag"><span class="string">    display:table-cell;</span></span></span><br><span class="line"><span class="tag"><span class="string">    vertical-align:middle;</span></span></span><br><span class="line"><span class="tag"><span class="string">&#125;</span></span></span><br><span class="line"><span class="tag"><span class="string">.child &#123;</span></span></span><br><span class="line"><span class="tag"><span class="string">    display:inline-block;</span></span></span><br><span class="line"><span class="tag"><span class="string">&#125;</span></span></span><br></pre></td></tr></table></figure>
-<h5 id="（3）优缺点-7"><a href="#（3）优缺点-7" class="headerlink" title="（3）优缺点"></a>（3）优缺点</h5><ul>
-<li>优点：兼容性较好</li>
-</ul>
-<h4 id="3）使用flex-justify-content-align-items"><a href="#3）使用flex-justify-content-align-items" class="headerlink" title="3）使用flex+justify-content+align-items"></a>3）使用flex+justify-content+align-items</h4><h5 id="（1）原理、用法-9"><a href="#（1）原理、用法-9" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><p>原理：通过设置CSS3布局利器flex中的justify-content和align-items，从而达到水平垂直居中。详见：水平居中的4）和垂直居中的3）。</p>
-<h5 id="（2）代码实例-9"><a href="#（2）代码实例-9" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child&gt;DEMO&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">&lt;/div&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string"></span></span></span><br><span class="line"><span class="tag"><span class="string">.parent &#123;</span></span></span><br><span class="line"><span class="tag"><span class="string">    display:flex;</span></span></span><br><span class="line"><span class="tag"><span class="string">    justify-content:center;</span></span></span><br><span class="line"><span class="tag"><span class="string">    align-items:center;</span></span></span><br><span class="line"><span class="tag"><span class="string">&#125;</span></span></span><br></pre></td></tr></table></figure>
-<h5 id="（3）优缺点-8"><a href="#（3）优缺点-8" class="headerlink" title="（3）优缺点"></a>（3）优缺点</h5><ul>
-<li>优点：只设置了parent</li>
-<li>缺点：兼容性存在一定问题</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1567,7 +1515,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
