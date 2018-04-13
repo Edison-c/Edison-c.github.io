@@ -310,6 +310,230 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/19/关于Node-js的学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="edison-c">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edison-c's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/19/关于Node-js的学习笔记/" itemprop="url">关于Node.js的学习笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-19T20:12:50+08:00">2018-01-19</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/node-js/" itemprop="url" rel="index"><span itemprop="name">node.js</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计：</span>
+                
+                <span title="字数统计">3.7k字</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长：</span>
+                
+                <span title="阅读时长">8:20分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="安装Node-js和NPM"><a href="#安装Node-js和NPM" class="headerlink" title="安装Node.js和NPM"></a>安装Node.js和NPM</h4><p>安装node.js很简单，就像平时安装软件一样,安装完成后，在Mac或Linux环境下，请打开终端，然后输入<code>node -v</code>，你应该看到如下输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br><span class="line">v8.9.3</span><br></pre></td></tr></table></figure>
+<p>继续在命令提示符输入<code>node</code>，此刻你将进入Node.js的交互环境。在交互环境下，你可以输入任意JavaScript语句。</p>
+<p>在正式开始Node.js学习之前，我们先认识一下npm。</p>
+<p>npm是什么东东？npm其实是Node.js的包管理工具（package manager）。</p>
+<p>为啥我们需要一个包管理工具呢？因为我们在Node.js上开发时，会用到很多别人写的JavaScript代码。如果我们要使用别人写的某个包，每次都根据名称搜索一下官方网站，下载代码，解压，再使用，非常繁琐。于是一个集中管理的工具应运而生：大家都把自己开发的模块打包后放到npm官网上，如果要使用，直接通过npm安装就可以直接用，不用管代码存在哪，应该从哪下载。</p>
+<p>更重要的是，如果我们要使用模块A，而模块A又依赖于模块B，模块B又依赖于模块X和模块Y，npm可以根据依赖关系，把所有依赖的包都下载下来并管理起来。否则，靠我们自己手动管理，肯定既麻烦又容易出错。</p>
+<p>npm已经在Node.js安装的时候顺带装好了。我们在命令提示符或者终端输入<code>npm -v</code>，应该看到类似的输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm -v</span><br><span class="line">5.6.0</span><br></pre></td></tr></table></figure>
+<h4 id="第一个Node程序"><a href="#第一个Node程序" class="headerlink" title="第一个Node程序"></a>第一个Node程序</h4><p>绝对不能用Word和写字板。Word和写字板保存的不是纯文本文件。如果我们要用记事本来编写JavaScript代码，要务必注意，记事本以UTF-8格式保存文件时，会自作聪明地在文件开始的地方加上几个特殊字符（UTF-8 BOM），结果经常会导致程序运行出现莫名其妙的错误。</p>
+<p>所以，用记事本写代码时请注意，保存文件时使用ANSI编码，并且暂时不要输入中文。</p>
+<p>如果你的电脑上已经安装了Sublime Text，或者Notepad++，也可以用来编写JavaScript代码，注意用UTF-8格式保存。</p>
+<p>输入以下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Hello, world.'</span>);</span><br></pre></td></tr></table></figure>
+<p>第一行总是写上<code>&#39;use strict&#39;;</code>是因为我们总是以严格模式运行JavaScript代码，避免各种潜在陷阱。</p>
+<p>然后，选择一个目录，例如<code>C:\Workspace</code>，把文件保存为<code>hello.js</code>，就可以打开命令行窗口，把当前目录切换到<code>hello.js</code>所在目录，然后输入以下命令运行这个程序了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Workspace&gt;node hello.js</span><br><span class="line">Hello, world.</span><br></pre></td></tr></table></figure>
+<p>也可以保存为别的名字，比如<code>first.js</code>，但是必须要以.js结尾。此外，文件名只能是英文字母、数字和下划线的组合。</p>
+<h5 id="命令行模式和Node交互模式"><a href="#命令行模式和Node交互模式" class="headerlink" title="命令行模式和Node交互模式"></a>命令行模式和Node交互模式</h5><p>在命令行模式运行<code>.js</code>文件和在Node交互式环境下直接运行JavaScript代码有所不同。Node交互式环境会把每一行JavaScript代码的结果自动打印出来，但是，直接运行JavaScript文件却不会。</p>
+<p>例如，在Node交互式环境下，输入：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="number">100</span> + <span class="number">200</span> + <span class="number">300</span>;</span><br><span class="line"><span class="number">600</span></span><br></pre></td></tr></table></figure>
+<p>直接可以看到结果600。</p>
+<p>但是，写一个<code>calc.js</code>的文件，内容如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">100</span> + <span class="number">200</span> + <span class="number">300</span>;</span><br></pre></td></tr></table></figure>
+<p>然后在命令行模式下执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Workspace&gt;node calc.js</span><br></pre></td></tr></table></figure>
+<p>发现什么输出都没有。</p>
+<p>这是正常的。想要输出结果，必须自己用<code>console.log()</code>打印出来。把<code>calc.js</code>改造一下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">100</span> + <span class="number">200</span> + <span class="number">300</span>);</span><br></pre></td></tr></table></figure>
+<p>再执行，就可以看到结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Workspace&gt;node calc.js</span><br><span class="line">600</span><br></pre></td></tr></table></figure>
+<h5 id="使用严格模式"><a href="#使用严格模式" class="headerlink" title="使用严格模式"></a>使用严格模式</h5><p>如果在JavaScript文件开头写上<code>&#39;use strict&#39;;</code>，那么Node在执行该JavaScript时将使用严格模式。但是，在服务器环境下，如果有很多JavaScript文件，每个文件都写上<code>&#39;use strict&#39;;</code>很麻烦。我们可以给Nodejs传递一个参数，让Node直接为所有js文件开启严格模式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node --use_strict calc.js</span><br></pre></td></tr></table></figure>
+<p>后续代码，如无特殊说明，我们都会直接给Node传递<code>--use_strict</code>参数来开启严格模式。</p>
+<h5 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h5><p>用文本编辑器写JavaScript程序，然后保存为后缀为<code>.js</code>的文件，就可以用node直接运行这个程序了。</p>
+<p>Node的交互模式和直接运行<code>.js</code>文件有什么区别呢？</p>
+<p>直接输入node进入交互模式，相当于启动了Node解释器，但是等待你一行一行地输入源代码，每输入一行就执行一行。</p>
+<p>直接运行<code>node hello.js</code>文件相当于启动了Node解释器，然后一次性把<code>hello.js</code>文件的源代码给执行了，你是没有机会以交互的方式输入源代码的。</p>
+<h4 id="搭建Node开发环境"><a href="#搭建Node开发环境" class="headerlink" title="搭建Node开发环境"></a>搭建Node开发环境</h4><p>Visual Studio Code由微软出品，但它不是那个大块头的Visual Studio，它是一个精简版的迷你Visual Studio，并且，Visual Studio Code可以跨！平！台！Windows、Mac和Linux通用。</p>
+<p>在Mac系统上，Finder选中一个目录，右键菜单并没有“通过Code打开”这个操作。不过我们可以通过Automator自己添加这个操作。</p>
+<p>先运行Automator，选择“服务”：</p>
+<p><img src="/2018/01/19/关于Node-js的学习笔记/1.png" alt=""></p>
+<p>然后，执行以下操作:</p>
+<p><img src="/2018/01/19/关于Node-js的学习笔记/2.png" alt=""></p>
+<p>在右侧面板选择“服务”收到选定的“文件夹”，位于“Finder.app“，该选项是为了从Finder中接收一个文件夹；<br>在左侧面板选择”实用工具“，然后找到”运行Shell脚本“，把它拽到右侧面板里；<br>在右侧”运行Shell脚本“的面板里，选择Shell”/bin/bash“，传递输入“作为自变量”，然后修改Shell脚本如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for f in "$@"</span><br><span class="line">do</span><br><span class="line">    open -a "Visual Studio Code" "$f"</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>保存为“Open With VSCode”后，打开Finder，选中一个文件夹，点击右键，“服务”，就可以看到“Open With VSCode”菜单：</p>
+<p><img src="/2018/01/19/关于Node-js的学习笔记/3.png" alt=""></p>
+<h5 id="运行和调试JavaScript"><a href="#运行和调试JavaScript" class="headerlink" title="运行和调试JavaScript"></a>运行和调试JavaScript</h5><p>在VS Code中，我们可以非常方便地运行JavaScript文件。</p>
+<p>VS Code以文件夹作为工程目录（Workspace Dir），所有的JavaScript文件都存放在该目录下。此外，VS Code在工程目录下还需要一个.vscode的配置目录，里面存放里VS Code需要的配置文件。</p>
+<p>假设我们在<code>C:\Work\</code>目录下创建了一个<code>hello</code>目录作为工程目录，并编写了一个<code>hello.js</code>文件，则该工程目录的结构如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">hello/ &lt;-- workspace dir</span><br><span class="line">|</span><br><span class="line">+- hello.js &lt;-- JavaScript file</span><br><span class="line">|</span><br><span class="line">+- .vscode/  &lt;-- VS Code config</span><br><span class="line">   |</span><br><span class="line">   +- launch.json &lt;-- VS Code config file <span class="keyword">for</span> JavaScript</span><br></pre></td></tr></table></figure>
+<p>可以用VS Code快速创建launch.json，然后修改如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"version"</span>: <span class="string">"0.2.0"</span>,</span><br><span class="line">    <span class="string">"configurations"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span>: <span class="string">"Run hello.js"</span>,</span><br><span class="line">            <span class="string">"type"</span>: <span class="string">"node"</span>,</span><br><span class="line">            <span class="string">"request"</span>: <span class="string">"launch"</span>,</span><br><span class="line">            <span class="string">"program"</span>: <span class="string">"$&#123;workspaceRoot&#125;/hello.js"</span>,</span><br><span class="line">            <span class="string">"stopOnEntry"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="string">"args"</span>: [],</span><br><span class="line">            <span class="string">"cwd"</span>: <span class="string">"$&#123;workspaceRoot&#125;"</span>,</span><br><span class="line">            <span class="string">"preLaunchTask"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="string">"runtimeExecutable"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="string">"runtimeArgs"</span>: [</span><br><span class="line">                <span class="string">"--nolazy"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="string">"env"</span>: &#123;</span><br><span class="line">                <span class="string">"NODE_ENV"</span>: <span class="string">"development"</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="string">"externalConsole"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="string">"sourceMaps"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="string">"outDir"</span>: <span class="literal">null</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有了配置文件，即可使用VS Code调试JavaScript。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/14/进程和线程-Process-and-Thread/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1261,312 +1485,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/05/CSS布局方案-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="edison-c">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/tx.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Edison-c's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/04/05/CSS布局方案-2/" itemprop="url">CSS布局方案-2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-05T15:27:30+08:00">2017-04-05</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/css/" itemprop="url" rel="index"><span itemprop="name">css</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计：</span>
-                
-                <span title="字数统计">11k字</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长：</span>
-                
-                <span title="阅读时长">23:35分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="多列布局"><a href="#多列布局" class="headerlink" title="多列布局"></a>多列布局</h2><h3 id="定宽-自适应"><a href="#定宽-自适应" class="headerlink" title="定宽+自适应"></a>定宽+自适应</h3><h4 id="1）使用float-overflow"><a href="#1）使用float-overflow" class="headerlink" title="1）使用float+overflow"></a>1）使用float+overflow</h4><h5 id="（1）原理、用法"><a href="#（1）原理、用法" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：通过将左边框脱离文本流，设置右边规定当内容溢出元素框时发生的事情以达到多列布局。</li>
-<li>用法：先将左框设置为<code>float:left、width、margin-left</code>，再设置实际的右框<code>overflow:hidden</code>。</li>
-</ul>
-<h5 id="（2）代码实例"><a href="#（2）代码实例" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>left<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">.left &#123;</span><br><span class="line">    float:left;</span><br><span class="line">    width:100px;</span><br><span class="line">    margin-right:20px;</span><br><span class="line">&#125;</span><br><span class="line">.right &#123;</span><br><span class="line">    overflow:hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="（3）优缺点"><a href="#（3）优缺点" class="headerlink" title="（3）优缺点"></a>（3）优缺点</h5><ul>
-<li>优点：简单<br>+缺点：不支持ie6</li>
-</ul>
-<h4 id="2）使用float-margin"><a href="#2）使用float-margin" class="headerlink" title="2）使用float+margin"></a>2）使用float+margin</h4><h5 id="（1）原理、用法-1"><a href="#（1）原理、用法-1" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><p>原理：通过将左框脱离文本流，加上右框向右移动一定的距离，以达到视觉上的多列布局。<br>用法：先将左框设置为float:left、margin-left，再设置右框margin-left。</p>
-<h5 id="（2）代码实例-1"><a href="#（2）代码实例-1" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>left<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">.left &#123;</span><br><span class="line">    float:left;</span><br><span class="line">    width:100px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.right &#123;</span><br><span class="line">    margin-left:120px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="3）优缺点"><a href="#3）优缺点" class="headerlink" title="3）优缺点"></a>3）优缺点</h5><ul>
-<li>优点：简单，易理解</li>
-<li>缺点：兼容性存在一定问题，ie6下有3px的bug。right下的p清除浮动将产生bug</li>
-</ul>
-<h4 id="3）使用float-margin（改良版）"><a href="#3）使用float-margin（改良版）" class="headerlink" title="3）使用float+margin（改良版）"></a>3）使用float+margin（改良版）</h4><h5 id="（1）原理、用法-2"><a href="#（1）原理、用法-2" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：在1）的基础之上，通过向右框添加一个父框，再加上设置左、右父框属性使之产生BFC以去除bug。</li>
-<li>用法：先将左框设置为<code>float:left、margin-left、position:relative</code>，再设置右父框<code>float:right、width:100%、margin-left</code>，最后设置实际的右框margin-left。</li>
-</ul>
-<h4 id="（2）代码实例-2"><a href="#（2）代码实例-2" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>left<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"rigth-fix"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">.left &#123;</span><br><span class="line">    float:left;</span><br><span class="line">    width:100px;</span><br><span class="line">    position:relative;</span><br><span class="line">&#125;</span><br><span class="line">.right-fix &#123;</span><br><span class="line">    float:right;</span><br><span class="line">    width:100%;</span><br><span class="line">    margin-left:-100px;</span><br><span class="line">&#125;</span><br><span class="line">.right &#123;</span><br><span class="line">    margin-left:120px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="（3）优缺点-1"><a href="#（3）优缺点-1" class="headerlink" title="（3）优缺点"></a>（3）优缺点</h5><ul>
-<li>优点：简单，易理解</li>
-</ul>
-<h4 id="4）使用table"><a href="#4）使用table" class="headerlink" title="4）使用table"></a>4）使用table</h4><h5 id="（1）原理、用法-3"><a href="#（1）原理、用法-3" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：通过将父框设置为表格，将左右边框转化为类似于同一行的td，从而达到多列布局。</li>
-<li>用法：先将父框设置为<code>display:table</code>、<code>width:100%</code>、<code>table-layout:fixed</code>，再设置左右框<code>display:table-cell</code>，最后设置左框width、padding-right。</li>
-</ul>
-<h5 id="（2）代码实例-3"><a href="#（2）代码实例-3" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>left<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">.parent &#123;</span><br><span class="line">    display:table;</span><br><span class="line">    width:100%;</span><br><span class="line">    table-layout:fixed;</span><br><span class="line">&#125;</span><br><span class="line">.left &#123;</span><br><span class="line">    width:100px;</span><br><span class="line">    padding-right:20px;</span><br><span class="line">&#125;</span><br><span class="line">.right,.left &#123;</span><br><span class="line">    display:table-cell; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="5）使用flex"><a href="#5）使用flex" class="headerlink" title="5）使用flex"></a>5）使用flex</h4><h5 id="（1）原理、用法-4"><a href="#（1）原理、用法-4" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：通过设置CSS3布局利器flex中的flex属性以达到多列布局。</li>
-<li>用法：先将父框设置为<code>display:flex</code>，再设置左框<code>flex:1</code>，最后设置左框width、margin-right。</li>
-</ul>
-<h5 id="（2）代码实例-4"><a href="#（2）代码实例-4" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>left<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">.parent &#123;</span><br><span class="line">    display:flex;</span><br><span class="line">&#125;</span><br><span class="line">.left &#123;</span><br><span class="line">    width:100px;</span><br><span class="line">    margin-right:20px;</span><br><span class="line">&#125;</span><br><span class="line">.right &#123;</span><br><span class="line">    flex:1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="（3）优缺点-2"><a href="#（3）优缺点-2" class="headerlink" title="（3）优缺点"></a>（3）优缺点</h5><ul>
-<li>优点：flex很强大</li>
-<li>缺点：兼容性存在一定问题，性能存在一定问题</li>
-</ul>
-<h3 id="两列定宽-一列自适应"><a href="#两列定宽-一列自适应" class="headerlink" title="两列定宽+一列自适应"></a>两列定宽+一列自适应</h3><h5 id="（1）原理、用法-5"><a href="#（1）原理、用法-5" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：这种情况与两列定宽差不多。</li>
-<li>用法：先将左、中框设置为<code>float:left</code>、width、margin-right，再设置右框<code>overflow:hidden</code>。</li>
-</ul>
-<h5 id="（2）代码实例-5"><a href="#（2）代码实例-5" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>left<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"center"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>center<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">.left,.center &#123;</span><br><span class="line">    float:left;</span><br><span class="line">    width:100px;</span><br><span class="line">    margin-right:20px;</span><br><span class="line">&#125;</span><br><span class="line">.right &#123;</span><br><span class="line">    overflow:hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="不定宽-自适应"><a href="#不定宽-自适应" class="headerlink" title="不定宽+自适应"></a>不定宽+自适应</h3><h4 id="1）使用float-overflow-1"><a href="#1）使用float-overflow-1" class="headerlink" title="1）使用float+overflow"></a>1）使用float+overflow</h4><h5 id="（1）原理、用法-6"><a href="#（1）原理、用法-6" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：这种情况与两列定宽查不多。</li>
-<li>用法：先将左框设置为<code>float:left</code>、margin-right，再设置右框<code>overflow: hidden</code>，最后设置左框中的内容width。</li>
-</ul>
-<h5 id="（2）代码实例-6"><a href="#（2）代码实例-6" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>left<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">.left&#123;</span><br><span class="line">        float: left;</span><br><span class="line">        margin-right: 20px;</span><br><span class="line">&#125;</span><br><span class="line">.right&#123;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">&#125;</span><br><span class="line">.left p&#123;</span><br><span class="line">    width: 200px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="（3）优缺点-3"><a href="#（3）优缺点-3" class="headerlink" title="（3）优缺点"></a>（3）优缺点</h5><ul>
-<li>优点：简单</li>
-<li>缺点：ie6下兼容性存在一定问题</li>
-</ul>
-<h4 id="2）使用table"><a href="#2）使用table" class="headerlink" title="2）使用table"></a>2）使用table</h4><h5 id="（1）原理、用法-7"><a href="#（1）原理、用法-7" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：通过将父框改变为表格，将左右框转换为类似于同一行的td以达到多列布局，设置父框宽度100%，给左框子元素一个固定宽度从而达到自适应。</li>
-<li>用法：先将父框设置为<code>display: table</code>、width: 100%，再设置左、右框<code>display: table-cell</code>，最后设置左框<code>width: 0.1%</code>、padding-right以及左框中的内容width。</li>
-</ul>
-<h5 id="（2）代码实例-7"><a href="#（2）代码实例-7" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>left<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">.parent&#123;</span><br><span class="line">    display: table; </span><br><span class="line">    width: 100%;</span><br><span class="line">    &#125;</span><br><span class="line">.left,.right&#123;</span><br><span class="line">    display: table-cell;</span><br><span class="line">&#125;</span><br><span class="line">.left&#123;</span><br><span class="line">    width: 0.1%;</span><br><span class="line">    padding-right: 20px;</span><br><span class="line">&#125;</span><br><span class="line">.left p&#123;</span><br><span class="line">    width:200px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="（3）优缺点-4"><a href="#（3）优缺点-4" class="headerlink" title="（3）优缺点"></a>（3）优缺点</h5><ul>
-<li>缺点：ie6 ie7不支持</li>
-</ul>
-<h4 id="3）使用flex"><a href="#3）使用flex" class="headerlink" title="3）使用flex"></a>3）使用flex</h4><h5 id="（1）原理、用法-8"><a href="#（1）原理、用法-8" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：通过设置CSS3布局利器flex中的flex属性以达到多列布局，加上给左框中的内容定宽、给右框设置flex达到不定款+自适应。</li>
-<li>用法：先将父框设置为<code>display:flex</code>，再设置右框<code>flex:1</code>，最后设置左框<code>margin-right:20px</code>、左框中的内容width。</li>
-</ul>
-<h5 id="（2）代码实例-8"><a href="#（2）代码实例-8" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>left<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">.parent &#123;</span><br><span class="line">    display:flex;</span><br><span class="line">&#125;</span><br><span class="line">.left &#123;</span><br><span class="line">    margin-right:20px;</span><br><span class="line">&#125;</span><br><span class="line">.right &#123;</span><br><span class="line">    flex:1;</span><br><span class="line">&#125;</span><br><span class="line">.left p&#123;</span><br><span class="line">    width: 200px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="（3）优缺点-5"><a href="#（3）优缺点-5" class="headerlink" title="（3）优缺点"></a>（3）优缺点</h5><ul>
-<li>优点：flex很强大</li>
-<li>缺点：兼容性存在一定问题，性能存在一定问题</li>
-</ul>
-<h3 id="两列不定宽-一列自适应"><a href="#两列不定宽-一列自适应" class="headerlink" title="两列不定宽+一列自适应"></a>两列不定宽+一列自适应</h3><h5 id="（1）原理、用法-9"><a href="#（1）原理、用法-9" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：这个情况与一列不定宽+一列自适应查不多。</li>
-<li>用法：先将左、中框设置为<code>float:left</code>、margin-right，再设置右框<code>overflow:hidden</code>，最后给左中框中的内容设置width。</li>
-</ul>
-<h5 id="（2）代码实例-9"><a href="#（2）代码实例-9" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>left<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"center"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>center<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">.left,.center&#123;</span><br><span class="line">    float: left;</span><br><span class="line">    margin-right: 20px;</span><br><span class="line">&#125;</span><br><span class="line">.right&#123;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">&#125;</span><br><span class="line">.left p,.center p&#123;</span><br><span class="line">    width: 100px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="等分布局"><a href="#等分布局" class="headerlink" title="等分布局"></a>等分布局</h3><p><img src="/2017/04/05/CSS布局方案-2/df.png"></p>
-<p>公式转化：</p>
-<p><code>l=w*n+g*(n-1)-&gt;l=w*n+g*n-g-&gt;l+g=（w+g）*n</code></p>
-<p><img src="/2017/04/05/CSS布局方案-2/df2.png"></p>
-<p>因此，我们需要解决两个问题：</p>
-<ul>
-<li>如何让总宽度增加g(即：L+g)</li>
-<li>如何让每个宽包含g（即：w+g）</li>
-</ul>
-<h4 id="1）使用float"><a href="#1）使用float" class="headerlink" title="1）使用float"></a>1）使用float</h4><h5 id="（1）原理、用法-10"><a href="#（1）原理、用法-10" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：增大父框的实际宽度后，使用CSS3属性box-sizing进行布局的辅助。</li>
-<li>用法：先将父框设置为<code>margin-left: -*px</code>,再设置子框<code>float: left、width: 25%、padding-left、box-sizing: border-box</code>。</li>
-</ul>
-<h5 id="（2）代码实例-10"><a href="#（2）代码实例-10" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"column"</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span>1<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"column"</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span>2<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"column"</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span>3<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"column"</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span>4<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">.parent&#123;</span><br><span class="line">    margin-left: -20px;//l+g</span><br><span class="line">&#125;</span><br><span class="line">.column&#123;</span><br><span class="line">    float: left;</span><br><span class="line">    width: 25%;</span><br><span class="line">    padding-left: 20px;</span><br><span class="line">    box-sizing: border-box;//包含padding区域 w+g</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="（3）优缺点-6"><a href="#（3）优缺点-6" class="headerlink" title="（3）优缺点"></a>（3）优缺点</h5><ul>
-<li>优点：兼容性较好</li>
-<li>缺点：ie6 ie7百分比兼容存在一定问题</li>
-</ul>
-<p>2）使用table</p>
-<p>（1）原理、用法</p>
-<p>原理：通过增加一个父框的修正框，增大其宽度，并将父框转换为table，将子框转换为tabel-cell进行布局。<br>用法：先将父框的修正框设置为<code>margin-left: -*px</code>，再设置父框<code>display: table</code>、<code>width:100%</code>、<code>table-layout: fixed</code>，设置子框<code>display: table-cell</code>、padding-left。</p>
-<h5 id="（2）代码实例-11"><a href="#（2）代码实例-11" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"column"</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span>1<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"column"</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span>2<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"column"</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span>3<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"column"</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span>4<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">.parent-fix&#123;</span><br><span class="line">    margin-left: -20px; //l+g</span><br><span class="line">&#125;</span><br><span class="line">.parent&#123;</span><br><span class="line">    display: table;</span><br><span class="line">    width:100%;</span><br><span class="line">    table-layout: fixed;</span><br><span class="line">&#125;</span><br><span class="line">.column&#123;</span><br><span class="line">    display: table-cell;</span><br><span class="line">    padding-left: 20px; //w+g</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="（3）优缺点-7"><a href="#（3）优缺点-7" class="headerlink" title="（3）优缺点"></a>（3）优缺点</h5><ul>
-<li>优点：结构和块数无关联</li>
-<li>缺点：增加了一层</li>
-</ul>
-<h4 id="3）使用flex-1"><a href="#3）使用flex-1" class="headerlink" title="3）使用flex"></a>3）使用flex</h4><h5 id="（1）原理、用法-11"><a href="#（1）原理、用法-11" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：通过设置CSS3布局利器flex中的flex属性以达到等分布局。</li>
-<li>用法：将父框设置为<code>display: flex</code>，再设置子框<code>flex: 1</code>，最后设置子框与子框的间距margin-left。</li>
-</ul>
-<h5 id="（2）代码实例-12"><a href="#（2）代码实例-12" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"column"</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span>1<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"column"</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span>2<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"column"</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span>3<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"column"</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span>4<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">.parent&#123;</span><br><span class="line">    display: flex;</span><br><span class="line">&#125;</span><br><span class="line">.column&#123;</span><br><span class="line">    flex: 1;</span><br><span class="line">&#125;</span><br><span class="line">.column+.column&#123;</span><br><span class="line">    margin-left:20px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="（3）优缺点-8"><a href="#（3）优缺点-8" class="headerlink" title="（3）优缺点"></a>（3）优缺点</h5><ul>
-<li>优点：代码量少，与块数无关</li>
-<li>缺点：兼容性存在一定问题</li>
-</ul>
-<h4 id="定宽-自适应-两块高度一样高"><a href="#定宽-自适应-两块高度一样高" class="headerlink" title="定宽+自适应+两块高度一样高"></a>定宽+自适应+两块高度一样高</h4><h4 id="1）使用float-1"><a href="#1）使用float-1" class="headerlink" title="1）使用float"></a>1）使用float</h4><h5 id="（1）原理、用法-12"><a href="#（1）原理、用法-12" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：通过过分加大左右子框的高度，辅助超出隐藏，以达到视觉上的等高。<br>+用法：将父框设置<code>overflow: hidden</code>，再设置左右子框<code>padding-bottom: 9999px</code>、<code>margin-bottom: -9999px</code>，最后设置左框<code>float: left</code>、width、margin-right，右框<code>overflow: hidden</code>。</li>
-</ul>
-<h5 id="（2）代码实例-13"><a href="#（2）代码实例-13" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>left<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">p&#123;</span><br><span class="line">    background: none!important;</span><br><span class="line">&#125;</span><br><span class="line">.left,.right&#123;</span><br><span class="line">    background: #444;</span><br><span class="line">&#125;</span><br><span class="line">.parent&#123;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">&#125;</span><br><span class="line">.left,.right&#123;</span><br><span class="line">    padding-bottom: 9999px;</span><br><span class="line">    margin-bottom: -9999px;</span><br><span class="line">&#125;</span><br><span class="line">.left&#123;</span><br><span class="line">    float: left; </span><br><span class="line">    width: 100px;</span><br><span class="line">    margin-right: 20px;</span><br><span class="line">&#125;</span><br><span class="line">.right&#123;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="3-优缺点"><a href="#3-优缺点" class="headerlink" title="(3)优缺点"></a>(3)优缺点</h5><ul>
-<li>优点：兼容性好</li>
-<li>缺点：伪等高，不是真正意义上的等高</li>
-</ul>
-<h4 id="2）使用table-1"><a href="#2）使用table-1" class="headerlink" title="2）使用table"></a>2）使用table</h4><h5 id="（1）原理、用法-13"><a href="#（1）原理、用法-13" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：将父框转化为tabel，将子框转化为tabel-cell布局，以达到定宽+自适应+两块高度一样高。</li>
-<li>用法：先将父框设置为<code>display:table</code>、<code>width:100%</code>、<code>table-layout:fixed</code>，再设置左右框为<code>display:table-cell</code>，最后设置左框width、padding-right。</li>
-</ul>
-<h5 id="（2）代码实例-14"><a href="#（2）代码实例-14" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>left<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">.parent &#123;</span><br><span class="line">    display:table;</span><br><span class="line">    width:100%;</span><br><span class="line">    table-layout:fixed;</span><br><span class="line">&#125;</span><br><span class="line">.left &#123;</span><br><span class="line">    width:100px;</span><br><span class="line">    padding-right:20px;</span><br><span class="line">&#125;</span><br><span class="line">.right,.left &#123;</span><br><span class="line">    display:table-cell;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="3）使用flex-2"><a href="#3）使用flex-2" class="headerlink" title="3）使用flex"></a>3）使用flex</h4><h5 id="（1）原理、用法-14"><a href="#（1）原理、用法-14" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：通过设置CSS3布局利器flex中的flex属性以达到定宽+自适应+两块高度一样高。</li>
-<li>用法：将父框设置为<code>display: flex</code>，再设置左框width、margin-right，最后设置右框flex:1。</li>
-</ul>
-<h5 id="（2）代码实例-15"><a href="#（2）代码实例-15" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>left<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>right<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">.parent &#123;</span><br><span class="line">    display:flex;</span><br><span class="line">&#125;</span><br><span class="line">.left &#123;</span><br><span class="line">    width:100px;</span><br><span class="line">    margin-right:20px;</span><br><span class="line">&#125;</span><br><span class="line">.right &#123;</span><br><span class="line">    flex:1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="（3）优缺点-9"><a href="#（3）优缺点-9" class="headerlink" title="（3）优缺点"></a>（3）优缺点</h5><ul>
-<li>优点：代码少，flex很强大</li>
-<li>缺点：兼容性存在一定问题</li>
-</ul>
-<h4 id="4-使用display"><a href="#4-使用display" class="headerlink" title="4)使用display"></a>4)使用display</h4><h5 id="（1）原理、用法-15"><a href="#（1）原理、用法-15" class="headerlink" title="（1）原理、用法"></a>（1）原理、用法</h5><ul>
-<li>原理：通过设置display中的CSS3的-webkit-box属性以达到定宽+自适应+两块高度一样高。</li>
-<li>用法：将父框设置为<code>display: -webkit-box</code>、<code>width: 100%</code>，再设置左框width、margin-right，最后设置右框<code>-webkit-box-flex: 1</code>。</li>
-</ul>
-<h5 id="（2）代码实例-16"><a href="#（2）代码实例-16" class="headerlink" title="（2）代码实例"></a>（2）代码实例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span>left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span>right <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">.parent &#123;</span><br><span class="line">    width: 100%;</span><br><span class="line">    display: -webkit-box;</span><br><span class="line">&#125;</span><br><span class="line">.left &#123;</span><br><span class="line">    width:100px;</span><br><span class="line">    margin-right: 20px;</span><br><span class="line">&#125;</span><br><span class="line">.right &#123;</span><br><span class="line">    -webkit-box-flex: 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="3-优缺点-1"><a href="#3-优缺点-1" class="headerlink" title="(3)优缺点"></a>(3)优缺点</h5><ul>
-<li>缺点：兼容性存在较大的问题</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1618,7 +1536,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1639,7 +1557,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
