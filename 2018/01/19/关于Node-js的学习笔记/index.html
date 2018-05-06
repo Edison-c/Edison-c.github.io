@@ -100,6 +100,7 @@
 
 
   <meta name="description" content="安装Node.js和NPM安装node.js很简单，就像平时安装软件一样,安装完成后，在Mac或Linux环境下，请打开终端，然后输入node -v，你应该看到如下输出： 12$ node -vv8.9.3 继续在命令提示符输入node，此刻你将进入Node.js的交互环境。在交互环境下，你可以输入任意JavaScript语句。 在正式开始Node.js学习之前，我们先认识一下npm。 npm是什">
+<meta name="keywords" content="后端开发,node">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于Node.js的学习笔记">
 <meta property="og:url" content="http://yoursite.com/2018/01/19/关于Node-js的学习笔记/index.html">
@@ -112,7 +113,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/01/19/关于Node-js的学习笔记/4.png">
 <meta property="og:image" content="http://yoursite.com/2018/01/19/关于Node-js的学习笔记/5.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/01/19/关于Node-js的学习笔记/6.png">
-<meta property="og:updated_time" content="2018-04-14T11:14:05.000Z">
+<meta property="og:updated_time" content="2018-05-06T12:51:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于Node.js的学习笔记">
 <meta name="twitter:description" content="安装Node.js和NPM安装node.js很简单，就像平时安装软件一样,安装完成后，在Mac或Linux环境下，请打开终端，然后输入node -v，你应该看到如下输出： 12$ node -vv8.9.3 继续在命令提示符输入node，此刻你将进入Node.js的交互环境。在交互环境下，你可以输入任意JavaScript语句。 在正式开始Node.js学习之前，我们先认识一下npm。 npm是什">
@@ -437,8 +438,7 @@
 <p>继续在命令提示符输入<code>node</code>，此刻你将进入Node.js的交互环境。在交互环境下，你可以输入任意JavaScript语句。</p>
 <p>在正式开始Node.js学习之前，我们先认识一下npm。</p>
 <p>npm是什么东东？npm其实是Node.js的包管理工具（package manager）。</p>
-<p>为啥我们需要一个包管理工具呢？因为我们在Node.js上开发时，会用到很多别人写的JavaScript代码。如果我们要使用别人写的某个包，每次都根据名称搜索一下官方网站，下载代码，解压，再使用，非常繁琐。于是一个集中管理的工具应运而生：大家都把自己开发的模块打包后放到npm官网上，如果要使用，直接通过npm安装就可以直接用，不用管代码存在哪，应该从哪下载。</p>
-<p>更重要的是，如果我们要使用模块A，而模块A又依赖于模块B，模块B又依赖于模块X和模块Y，npm可以根据依赖关系，把所有依赖的包都下载下来并管理起来。否则，靠我们自己手动管理，肯定既麻烦又容易出错。</p>
+<p>为啥我们需要一个包管理工具呢？因为我们在Node.js上开发时，会用到很多别人写的JavaScript代码。如果我们要使用别人写的某个包，每次都根据名称搜索一下官方网站，下载代码，解压，再使用，非常繁琐。于是一个集中管理的工具应运而生：大家都把自己开发的模块打包后放到npm官网上，如果要使用，直接通过npm安装就可以直接用，不用管代码存在哪，应该从哪下载。<br><a id="more"></a><br>更重要的是，如果我们要使用模块A，而模块A又依赖于模块B，模块B又依赖于模块X和模块Y，npm可以根据依赖关系，把所有依赖的包都下载下来并管理起来。否则，靠我们自己手动管理，肯定既麻烦又容易出错。</p>
 <p>npm已经在Node.js安装的时候顺带装好了。我们在命令提示符或者终端输入<code>npm -v</code>，应该看到类似的输出：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm -v</span><br><span class="line">5.6.0</span><br></pre></td></tr></table></figure>
 <h4 id="第一个Node程序"><a href="#第一个Node程序" class="headerlink" title="第一个Node程序"></a>第一个Node程序</h4><p>绝对不能用Word和写字板。Word和写字板保存的不是纯文本文件。如果我们要用记事本来编写JavaScript代码，要务必注意，记事本以UTF-8格式保存文件时，会自作聪明地在文件开始的地方加上几个特殊字符（UTF-8 BOM），结果经常会导致程序运行出现莫名其妙的错误。</p>
@@ -668,6 +668,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/后端开发/" rel="tag"># 后端开发</a>
+          
+            <a href="/tags/node/" rel="tag"># node</a>
+          
+        </div>
+      
 
       
       
@@ -686,6 +694,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/06/Python爬虫基本流程/" rel="prev" title="Python爬虫基本流程">
+                Python爬虫基本流程 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -763,7 +775,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -803,7 +815,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

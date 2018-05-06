@@ -99,25 +99,25 @@
 
 
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta name="keywords" content="html,hexo">
+  <meta name="description" content="本文中介绍了基础爬虫架构主要的的三个模块（HTML 下载器、HTML 解析器、数据存储器），无论大型还是小型爬虫都不会脱离这三个模块。  HTML 下载器：利用 requests 模块下载 HTML 网页  HTML 解析器：利用 re 正则表达式解析出有效数据  数据存储器：将有效数据通过文件或者数据库的形式存储起来">
+<meta name="keywords" content="爬虫">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2017/02/17/hello-world/index.html">
+<meta property="og:title" content="Python爬虫基本流程">
+<meta property="og:url" content="http://yoursite.com/2018/03/06/Python爬虫基本流程/index.html">
 <meta property="og:site_name" content="Edison-c&#39;s blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="本文中介绍了基础爬虫架构主要的的三个模块（HTML 下载器、HTML 解析器、数据存储器），无论大型还是小型爬虫都不会脱离这三个模块。  HTML 下载器：利用 requests 模块下载 HTML 网页  HTML 解析器：利用 re 正则表达式解析出有效数据  数据存储器：将有效数据通过文件或者数据库的形式存储起来">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-12T09:32:02.000Z">
+<meta property="og:updated_time" content="2018-05-06T12:45:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="Python爬虫基本流程">
+<meta name="twitter:description" content="本文中介绍了基础爬虫架构主要的的三个模块（HTML 下载器、HTML 解析器、数据存储器），无论大型还是小型爬虫都不会脱离这三个模块。  HTML 下载器：利用 requests 模块下载 HTML 网页  HTML 解析器：利用 re 正则表达式解析出有效数据  数据存储器：将有效数据通过文件或者数据库的形式存储起来">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/02/17/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/06/Python爬虫基本流程/"/>
 
 
 
@@ -127,7 +127,7 @@
   };
 </script>
 
-  <title>Hello World | Edison-c's blog</title>
+  <title>Python爬虫基本流程 | Edison-c's blog</title>
   
 
 
@@ -314,7 +314,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/17/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/06/Python爬虫基本流程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="edison-c">
@@ -331,7 +331,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">Python爬虫基本流程</h1>
         
 
         <div class="post-meta">
@@ -343,7 +343,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-17T00:00:00+08:00">2017-02-17</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-06T17:55:15+08:00">2018-03-06</time>
             
 
             
@@ -364,7 +364,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python3/" itemprop="url" rel="index"><span itemprop="name">python3</span></a></span>
 
                 
                 
@@ -392,7 +392,7 @@
                 
                   <span class="post-meta-item-text">字数统计：</span>
                 
-                <span title="字数统计">430字</span>
+                <span title="字数统计">2.3k字</span>
               
 
               
@@ -406,7 +406,7 @@
                 
                   <span class="post-meta-item-text">阅读时长：</span>
                 
-                <span title="阅读时长">0:57分钟</span>
+                <span title="阅读时长">5:01分钟</span>
               
             </div>
           
@@ -426,15 +426,36 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <p>本文中介绍了基础爬虫架构主要的的三个模块（HTML 下载器、HTML 解析器、数据存储器），无论大型还是小型爬虫都不会脱离这三个模块。</p>
+<ul>
+<li><p>HTML 下载器：利用 <code>requests</code> 模块下载 HTML 网页</p>
+</li>
+<li><p>HTML 解析器：利用 <code>re</code> 正则表达式解析出有效数据</p>
+</li>
+<li><p>数据存储器：将有效数据通过文件或者数据库的形式存储起来</p>
+</li>
+</ul>
+<a id="more"></a>
+<h4 id="一、构造-HTML-下载器"><a href="#一、构造-HTML-下载器" class="headerlink" title="一、构造 HTML 下载器"></a>一、构造 HTML 下载器</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> requests.exceptions <span class="keyword">import</span> RequestException</span><br><span class="line">headers = &#123;<span class="string">'User-Agent'</span>:<span class="string">'Mozilla/5.0 '</span>&#125;</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_one_page</span><span class="params">(url)</span>:</span></span><br><span class="line">   <span class="keyword">try</span>:</span><br><span class="line">       res = requests.get(url,headers = headers)</span><br><span class="line">       <span class="keyword">if</span> res.status_code == <span class="number">200</span>:</span><br><span class="line">           <span class="keyword">return</span> res.text</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line">   <span class="keyword">except</span> RequestException:</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">None</span></span><br></pre></td></tr></table></figure>
+<h4 id="二、构造-HTML-解析器"><a href="#二、构造-HTML-解析器" class="headerlink" title="二、构造 HTML 解析器"></a>二、构造 HTML 解析器</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_one_page</span><span class="params">(html)</span>:</span></span><br><span class="line">   pattern = re.compile(<span class="string">'&lt;dd&gt;.*?board-index.*?&gt;(\d+)&lt;/i&gt;.*?data-src="(.*?)".*?name"&gt;&lt;a'</span></span><br><span class="line">                        +<span class="string">'.*?&gt;(.*?)&lt;/a&gt;.*?star"&gt;(.*?)&lt;/p&gt;.*?releasetime"&gt;(.*?)&lt;/p&gt;'</span></span><br><span class="line">                        +<span class="string">'.*?integer"&gt;(.*?)&lt;/i&gt;.*?fraction"&gt;(.*?)&lt;/i&gt;.*?&lt;/dd&gt;'</span>,re.S)</span><br><span class="line">   items = re.findall(pattern,html)</span><br><span class="line">   <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">       <span class="keyword">yield</span>&#123;</span><br><span class="line">           <span class="string">'index'</span>: item[<span class="number">0</span>],</span><br><span class="line">           <span class="string">'image'</span>: item[<span class="number">1</span>],</span><br><span class="line">           <span class="string">'title'</span>: item[<span class="number">2</span>],</span><br><span class="line">           <span class="string">'actor'</span>: item[<span class="number">3</span>].strip()[<span class="number">3</span>:],</span><br><span class="line">           <span class="string">'time'</span>: item[<span class="number">4</span>].strip()[<span class="number">5</span>:],</span><br><span class="line">           <span class="string">'score'</span>: item[<span class="number">5</span>] + item[<span class="number">6</span>]</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h5><ul>
+<li><p>在函数中本来该 <code>return</code> 的地方用 <code>yield</code>，如果用 <code>return</code>，在第一轮循环就会跳出，结果文件只会有一部电影。如果用 <code>yield</code>，函数返回的就是一个生成器，而生成器作为一种特殊的迭代器，可以用 <code>for——in</code> 方法，一次一次的把 <code>yield</code> 拿出来；</p>
+</li>
+<li><p><code>re.findall(pattern,string[,flags])</code>：搜索整个 <code>string</code>，以列表的形式返回能匹配的全部子串，其中参数是匹配模式，如 <code>re.S</code> 表示点任意匹配模式，改变“<code>.</code>”的行为。</p>
+</li>
+</ul>
+<h4 id="三、构造数据存储器"><a href="#三、构造数据存储器" class="headerlink" title="三、构造数据存储器"></a>三、构造数据存储器</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_to_file</span><span class="params">(content)</span>:</span></span><br><span class="line">   <span class="keyword">with</span> open (<span class="string">'result.txt'</span>, <span class="string">'a'</span>,encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">       f.write(json.dumps(content,ensure_ascii=<span class="keyword">False</span>) + <span class="string">'\n'</span>)</span><br><span class="line">       f.close()</span><br></pre></td></tr></table></figure>
+<h5 id="注意事项：-1"><a href="#注意事项：-1" class="headerlink" title="注意事项："></a>注意事项：</h5><ul>
+<li><p>为什么 <code>ensure_ascii=False</code>？原因是 <code>json</code> 默认是以 <code>ASCII</code> 来解析 <code>code</code> 的，由于中文不在 <code>ASCII</code> 编码当中，因此就不让默认 <code>ASCII</code> 生效；</p>
+</li>
+<li><p>要写入特定编码的文本文件，请给 <code>open()</code>函数传入 <code>encoding</code> 参数，将字符串自动转换成指定编码。细心的童鞋会发现，以<code>&#39;w&#39;</code>模式写入文件时，如果文件已存在，会直接覆盖（相当于删掉后新写入一个文件）。如果我们希望追加到文件末尾怎么办？可以传入<code>&#39;a&#39;</code>以追加（append）模式写入。</p>
+</li>
+</ul>
+<p>接下来就是构造主函数，初始化各个模块，传入入口 URL，按照运行流程执行上面三大模块：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(offset)</span>:</span></span><br><span class="line">   url = <span class="string">'http://maoyan.com/board/4?offset='</span> + str(offset)</span><br><span class="line">   html = get_one_page(url)</span><br><span class="line">   <span class="keyword">for</span> item <span class="keyword">in</span> parse_one_page(html):</span><br><span class="line">       print(item)</span><br><span class="line">       write_to_file(item)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">   p = Pool()</span><br><span class="line">   p.map(main,[i*<span class="number">10</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>)])</span><br></pre></td></tr></table></figure>
+<h5 id="注意事项：-2"><a href="#注意事项：-2" class="headerlink" title="注意事项："></a>注意事项：</h5><ul>
+<li>为了提高速度，我们引入 <code>Pool</code> 模块，用多线程并发抓取。</li>
+</ul>
 
       
     </div>
@@ -455,9 +476,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/html/" rel="tag"># html</a>
-          
-            <a href="/tags/hexo/" rel="tag"># hexo</a>
+            <a href="/tags/爬虫/" rel="tag"># 爬虫</a>
           
         </div>
       
@@ -470,15 +489,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/01/19/关于Node-js的学习笔记/" rel="next" title="关于Node.js的学习笔记">
+                <i class="fa fa-chevron-left"></i> 关于Node.js的学习笔记
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/12/CSS布局方案-1/" rel="prev" title="CSS布局方案-1">
-                CSS布局方案-1 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -654,7 +673,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、构造-HTML-下载器"><span class="nav-number">1.</span> <span class="nav-text">一、构造 HTML 下载器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、构造-HTML-解析器"><span class="nav-number">2.</span> <span class="nav-text">二、构造 HTML 解析器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#注意事项："><span class="nav-number">2.1.</span> <span class="nav-text">注意事项：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、构造数据存储器"><span class="nav-number">3.</span> <span class="nav-text">三、构造数据存储器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#注意事项：-1"><span class="nav-number">3.1.</span> <span class="nav-text">注意事项：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#注意事项：-2"><span class="nav-number">3.2.</span> <span class="nav-text">注意事项：</span></a></li></ol></li></ol></div>
             
 
           </div>

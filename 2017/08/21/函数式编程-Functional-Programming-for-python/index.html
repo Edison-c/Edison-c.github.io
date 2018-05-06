@@ -100,13 +100,14 @@
 
 
   <meta name="description" content="高阶函数–Higher-order function变量可以指向函数以Python内置的求绝对值的函数abs()为例. 12&amp;gt;&amp;gt;&amp;gt; abs(-10)10 在这里abs是函数的主题，而abs(-10)则是函数的具体调用。 要获得函数调用结果，我们可以把结果赋值给变量： 123&amp;gt;&amp;gt;&amp;gt; x = abs(-10)&amp;gt;&amp;gt;&amp;gt; x10 函数本身也可以赋值给变量">
+<meta name="keywords" content="后端开发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="函数式编程-Functional Programming for python">
 <meta property="og:url" content="http://yoursite.com/2017/08/21/函数式编程-Functional-Programming-for-python/index.html">
 <meta property="og:site_name" content="Edison-c&#39;s blog">
 <meta property="og:description" content="高阶函数–Higher-order function变量可以指向函数以Python内置的求绝对值的函数abs()为例. 12&amp;gt;&amp;gt;&amp;gt; abs(-10)10 在这里abs是函数的主题，而abs(-10)则是函数的具体调用。 要获得函数调用结果，我们可以把结果赋值给变量： 123&amp;gt;&amp;gt;&amp;gt; x = abs(-10)&amp;gt;&amp;gt;&amp;gt; x10 函数本身也可以赋值给变量">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-12T16:37:12.000Z">
+<meta property="og:updated_time" content="2018-05-06T12:53:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="函数式编程-Functional Programming for python">
 <meta name="twitter:description" content="高阶函数–Higher-order function变量可以指向函数以Python内置的求绝对值的函数abs()为例. 12&amp;gt;&amp;gt;&amp;gt; abs(-10)10 在这里abs是函数的主题，而abs(-10)则是函数的具体调用。 要获得函数调用结果，我们可以把结果赋值给变量： 123&amp;gt;&amp;gt;&amp;gt; x = abs(-10)&amp;gt;&amp;gt;&amp;gt; x10 函数本身也可以赋值给变量">
@@ -430,8 +431,7 @@
 <p>在这里<code>abs</code>是函数的主题，而<code>abs(-10)</code>则是函数的具体调用。</p>
 <p>要获得函数调用结果，我们可以把结果赋值给变量：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = abs(<span class="number">-10</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line"><span class="number">10</span></span><br></pre></td></tr></table></figure>
-<p>函数本身也可以赋值给变量，即：变量可以指向函数。</p>
-<p>如果一个变量指向了一个函数，那么，可通过该变量来调用这个函数。 用代码验证一下：</p>
+<p>函数本身也可以赋值给变量，即：变量可以指向函数。<br><a id="more"></a><br>如果一个变量指向了一个函数，那么，可通过该变量来调用这个函数。 用代码验证一下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = abs</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f(<span class="number">-10</span>)</span><br><span class="line"><span class="number">10</span></span><br></pre></td></tr></table></figure>
 <p>说明变量f现在已经指向了<code>abs</code>函数本身。直接调用<code>abs()</code>函数和调用变量<code>f()</code>完全相同。</p>
 <h5 id="函数名也是变量"><a href="#函数名也是变量" class="headerlink" title="函数名也是变量"></a>函数名也是变量</h5><p>函数名其实就是指向函数的变量。对于abs()这个函数，完全可以把函数名<code>abs</code>看成变量，它指向一个可以计算绝对值的函数。</p>
@@ -541,6 +541,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/后端开发/" rel="tag"># 后端开发</a>
+          
+        </div>
+      
 
       
       
@@ -640,7 +646,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -680,7 +686,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
